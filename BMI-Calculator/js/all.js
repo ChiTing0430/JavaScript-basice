@@ -10,15 +10,18 @@ updateList(data);
 // 計算 BMI 值
 function addData(e) {
     e.preventDefault();
-    var txth = document.querySelector('#height').value;
-    var txtw = document.querySelector('#weight').value;
-    txth /= 100;
+    var height = document.querySelector('#height').value;
+    var weight = document.querySelector('#weight').value;
+    var txth = height / 100;
+    var txtw = weight;
     txth *= txth;
     var txtsum = txtw / txth;
     txtsum = txtsum.toFixed(2);
     console.log(txtsum);
     var todo = {
-        content: txtsum
+        content: txtsum,
+        weight: weight,
+        height: height,
     };
     data.push(todo);
     updateList(data);
