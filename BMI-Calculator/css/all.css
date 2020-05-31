@@ -230,6 +230,17 @@ table {
     color: #FFD366;
 }
 
+.main .removeall {
+    font-size: 24px;
+    color: #424242;
+    text-decoration: none;
+    margin: 20px auto;
+}
+
+.main .removeall:hover {
+    font-weight: bolder;
+}
+
 .footer {
     display: flex;
     justify-content: center;

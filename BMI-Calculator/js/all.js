@@ -1,13 +1,17 @@
 // 指定 DOM
 var btn = document.querySelector('.btn');
 var list = document.querySelector('.list');
+var removeall = document.querySelector('.removeall');
 var data = JSON.parse(localStorage.getItem('listData')) || [];
 var color = '';
+
 
 // 監聽 btn
 btn.addEventListener('click', getBMI);
 // 監聽刪除的 btn
 list.addEventListener('click', removelist);
+// 監聽刪除(清除全部)的 btn
+removeall.addEventListener('click', removealldata);
 
 updateList(data);
 
@@ -83,6 +87,19 @@ function removelist(e) {
     };
     var index = e.target.dataset.index;
     data.splice(index, 1);
+    updateList(data);
+    localStorage.setItem('listData', JSON.stringify(data));
+}
+// 點擊後清除所有紀錄
+function removealldata(e) {
+    e.preventDefault();
+    var click = e.target.nodeName;
+    if (e.target.nodeName !== 'A') {
+        return
+    };
+    // 從索引 0 的位置開始
+    // 長度為data.length
+    data.splice(0, data.length);
     updateList(data);
     localStorage.setItem('listData', JSON.stringify(data));
 }
