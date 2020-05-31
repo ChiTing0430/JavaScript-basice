@@ -143,7 +143,8 @@ table {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 90%;
+    padding-left: 10%;
     height: 300px;
     background-color: #424242;
 }
@@ -196,6 +197,13 @@ table {
 
 .header .btn:hover {
     box-shadow: 0 0 10px #FFD366;
+}
+
+.header .Category {
+    width: 130px;
+    font-size: 30px;
+    padding-left: 10px;
+    margin: auto;
 }
 
 .main {

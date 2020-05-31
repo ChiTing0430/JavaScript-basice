@@ -2,6 +2,7 @@
 var btn = document.querySelector('.btn');
 var list = document.querySelector('.list');
 var removeall = document.querySelector('.removeall');
+var divCategory = document.querySelector('.Category');
 var data = JSON.parse(localStorage.getItem('listData')) || [];
 var color = '';
 
@@ -69,6 +70,8 @@ function updateList(items) {
     var str = '';
     var changebtn = '';
     var changebtntxt = '看結果';
+    var changeCategory = '';
+    var changeCategorystyle = '';
     var len = items.length;
     // 抓取今天日期
     var today = new Date();
@@ -90,9 +93,17 @@ function updateList(items) {
             border:5px ${ items[i].color} solid;
             font-size: 30px;
             `
+            // 顯示 btn 後面出現的Category
+        changeCategory = items[i].Category
+        changeCategorystyle =
+            `
+            color:${items[i].color};
+            `
             // 更新 main 顯示內容
         str += '<li style="border-left:10px ' + items[i].color + ' solid;"><span class="Category">' + items[i].Category + '</span><span class="BMInumber">BMI :' + items[i].BMInumber + '</span><span class="weight">Weight :' + items[i].weight + '</span><span class="height">Height :' + items[i].height + '</span><span class="today">' + today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate() + '</span><a href="#" ><i class="far fa-trash-alt" data-index=' + i + '></i></a></li>';
     }
+    divCategory.innerHTML = changeCategory;
+    divCategory.style = changeCategorystyle;
     btn.innerHTML = changebtntxt;
     btn.style = changebtn;
     list.innerHTML = str;
