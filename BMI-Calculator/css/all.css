@@ -205,9 +205,29 @@ table {
 }
 
 .main .list li {
-    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 700px;
+    height: 60px;
+    padding: 0 20px;
+    margin-bottom: 20px;
     list-style: none;
-    background-color: green;
+    background-color: #fff;
+}
+
+.main .list span {
+    width: 100px;
+    font-size: 20px;
+    /* border: 1px solid #000000; */
+}
+
+
+/* Icons 大小顏色 */
+
+.main .list i {
+    font-size: 1.5em;
+    color: #FFD366;
 }
 
 .footer {
