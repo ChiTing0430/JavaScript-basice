@@ -175,18 +175,27 @@ table {
 }
 
 .header .btn {
-    display: block;
+    display: flex;
+    text-align: center;
+    justify-content: center;
     width: 120px;
     height: 120px;
-    text-align: center;
     line-height: 120px;
     text-decoration: none;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bolder;
     color: #424242;
-    border: none;
-    border-radius: 100px;
+    border-radius: 100%;
     background-color: #FFD366;
+}
+
+.header .btn span {
+    line-height: normal;
+    margin: auto 0;
+}
+
+.header .btn:hover {
+    box-shadow: 0 0 10px #FFD366;
 }
 
 .main {
@@ -231,13 +240,17 @@ table {
 }
 
 .main .removeall {
+    display: block;
     font-size: 24px;
     color: #424242;
     text-decoration: none;
     margin: 20px auto;
+    padding: 10px;
+    /* border: 1px solid #000000; */
 }
 
 .main .removeall:hover {
+    display: block;
     font-weight: bolder;
 }
 

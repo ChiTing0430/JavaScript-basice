@@ -51,8 +51,6 @@ function getBMI(e) {
         Category = '重度肥胖',
             color = '#FF1200'
     };
-    console.log('狀態:' + Category);
-    console.log(color);
     //有值後存進localStorage且更新data
     var todo = {
         BMInumber: BMIdata,
@@ -65,16 +63,38 @@ function getBMI(e) {
     updateList(data);
     localStorage.setItem('listData', JSON.stringify(data));
 }
-// 更新 main 頁面
+
+// 更新 Web 頁面
 function updateList(items) {
     var str = '';
+    var changebtn = '';
+    var changebtntxt = '看結果';
     var len = items.length;
     // 抓取今天日期
     var today = new Date();
-    // 以下為更新再 main 頁面上
+
     for (var i = 0; len > i; i++) {
+
+        // 更新 btn 顯示的文字
+        changebtntxt =
+            `
+            <span>
+            ${items[i].BMInumber}
+            <br>BMI
+            </span>
+            `
+            // 更新 btn 個顯示格式
+        changebtn =
+            `background-color: #424242;
+            color:${items[i].color};
+            border:5px ${ items[i].color} solid;
+            font-size: 30px;
+            `
+            // 更新 main 顯示內容
         str += '<li style="border-left:10px ' + items[i].color + ' solid;"><span class="Category">' + items[i].Category + '</span><span class="BMInumber">BMI :' + items[i].BMInumber + '</span><span class="weight">Weight :' + items[i].weight + '</span><span class="height">Height :' + items[i].height + '</span><span class="today">' + today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate() + '</span><a href="#" ><i class="far fa-trash-alt" data-index=' + i + '></i></a></li>';
     }
+    btn.innerHTML = changebtntxt;
+    btn.style = changebtn;
     list.innerHTML = str;
 }
 
@@ -90,6 +110,7 @@ function removelist(e) {
     updateList(data);
     localStorage.setItem('listData', JSON.stringify(data));
 }
+
 // 點擊後清除所有紀錄
 function removealldata(e) {
     e.preventDefault();
