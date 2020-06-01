@@ -3,9 +3,11 @@ var btn = document.querySelector('.btn');
 var list = document.querySelector('.list');
 var removeall = document.querySelector('.removeall');
 var divCategory = document.querySelector('.Category');
+var reset = document.querySelector('.reset');
 var data = JSON.parse(localStorage.getItem('listData')) || [];
 var color = '';
-
+var height = document.querySelector('#height');
+var weight = document.querySelector('#weight');
 
 // 監聽 btn
 btn.addEventListener('click', getBMI);
@@ -13,7 +15,7 @@ btn.addEventListener('click', getBMI);
 list.addEventListener('click', removelist);
 // 監聽刪除(清除全部)的 btn
 removeall.addEventListener('click', removealldata);
-
+reset.addEventListener('click', resetallIcon);
 updateList(data);
 
 function getBMI(e) {
@@ -72,10 +74,12 @@ function updateList(items) {
     var changebtntxt = '看結果';
     var changeCategory = '';
     var changeCategorystyle = '';
+    var resetbtn = '';
+    var resetbtnstyle = '';
     var len = items.length;
     // 抓取今天日期
     var today = new Date();
-
+    // 更新網頁的物件
     for (var i = 0; len > i; i++) {
 
         // 更新 btn 顯示的文字
@@ -99,13 +103,23 @@ function updateList(items) {
             `
             color:${items[i].color};
             `
+        resetbtn =
+            `
+            <i class="fas fa-sync-alt" style=""" id="resetIcon"></i>
+            `
+        resetbtnstyle =
+            `
+            color:${items[i].color};
+            `
             // 更新 main 顯示內容
         str += '<li style="border-left:10px ' + items[i].color + ' solid;"><span class="Category">' + items[i].Category + '</span><span class="BMInumber">BMI :' + items[i].BMInumber + '</span><span class="weight">Weight :' + items[i].weight + '</span><span class="height">Height :' + items[i].height + '</span><span class="today">' + today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate() + '</span><a href="#" ><i class="far fa-trash-alt" data-index=' + i + '></i></a></li>';
     }
-    divCategory.innerHTML = changeCategory;
-    divCategory.style = changeCategorystyle;
+    reset.innerHTML = resetbtn;
+    reset.style = resetbtnstyle;
     btn.innerHTML = changebtntxt;
     btn.style = changebtn;
+    divCategory.innerHTML = changeCategory;
+    divCategory.style = changeCategorystyle;
     list.innerHTML = str;
 }
 
@@ -134,4 +148,14 @@ function removealldata(e) {
     data.splice(0, data.length);
     updateList(data);
     localStorage.setItem('listData', JSON.stringify(data));
+}
+
+// 點擊 resetIcon 觸發清除 header 的事件
+function resetallIcon() {
+    height.value = '';
+    weight.value = '';
+    divCategory.innerHTML = '';
+    btn.innerHTML = '看結果';
+    btn.style = '';
+    reset.innerHTML = '';
 }

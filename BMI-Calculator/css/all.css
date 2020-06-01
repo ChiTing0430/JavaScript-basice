@@ -199,10 +199,23 @@ table {
     box-shadow: 0 0 10px #FFD366;
 }
 
+.header #resetIcon {
+    position: relative;
+    top: 60px;
+    left: -20px;
+    font-size: 1.5em;
+    border-radius: 100%;
+    background-color: #424242;
+    margin: auto;
+}
+
+.header #resetIcon:hover {
+    box-shadow: 0 0 10px #FFD366;
+}
+
 .header .Category {
     width: 130px;
     font-size: 30px;
-    padding-left: 10px;
     margin: auto;
 }
 
