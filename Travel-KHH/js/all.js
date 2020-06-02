@@ -2600,3 +2600,52 @@ var data = [{
         Id: "C1_397000000A_000164"
     }
 ];
+// 指定 DOM
+var selectlist = document.querySelector('.select');
+var localSdata = JSON.parse(localStorage.getItem('listData')) || [];
+
+// 監聽 selectlist
+selectlist.addEventListener('click', clickselect);
+initial();
+
+// 開啟 Web 初始
+function initial() {
+    // 預先將下拉式選單之高雄市區域地名 --> 取出 -- > 置入
+    // Create 空的高雄地區 Array
+    var KHHlocationArray = [];
+    // 計算 data 資料總長度
+    var datalen = data.length;
+    // 將資料的地區 Zone 放進 高雄地區 Array
+    for (var i = 0; i < datalen; i++) {
+        KHHlocationArray.push(data[i].Zone);
+    }
+
+    console.log(KHHlocationArray);
+
+    // 運用 new Set 去除相同地名 but new Set() 輸出值為 Object
+    // SO 運用  Array.from()將其轉換回矩陣型態
+    KHHlocationArray = Array.from(new Set(KHHlocationArray));
+
+    console.log(KHHlocationArray);
+    // 去除相同地名後計算 newKlAlen 長度
+    var newKlAlen = KHHlocationArray.length;
+    // 初始為 ${--請選擇行政區--}
+    var addselect = `<option>--請選擇行政區--</option>`;
+
+    // 並將值 input to select
+    for (i = 0; i < newKlAlen; i++) {
+        addselect +=
+            `
+        <option value ="${KHHlocationArray[i]}" >${KHHlocationArray[i]}</option>
+        `
+    }
+    selectlist.innerHTML = addselect;
+}
+
+function clickselect(e) {
+    e.preventDefault();
+    var click = e.target.nodeName;
+    var index = e.target.value;
+    console.log(click);
+    console.log(index);
+}
