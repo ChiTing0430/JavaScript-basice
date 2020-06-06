@@ -2671,6 +2671,21 @@ function initial() {
     clickName.innerHTML = '全部地區';
 }
 
+// 取得 scrollbir 的值
+window.onscroll = function() {
+    var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+    // console.log('scrollTop :', scrollTop);
+
+    // 計算 scrollbir 最高的值
+    var scrollTopheight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    // console.log('scrollTopheight :', scrollTopheight);
+
+    // 將 scrollbir 的值轉換成百分比
+    var scrolled = (scrollTop / scrollTopheight) * 100;
+    scrolled = scrolled.toFixed(2);
+    // console.log(scrolled);
+};
+
 // 確認點擊動作會有怎樣的 response
 function clickselect(e) {
     e.preventDefault();
