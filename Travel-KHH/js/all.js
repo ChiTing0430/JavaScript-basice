@@ -2605,6 +2605,7 @@ var selectlist = document.querySelector('.select');
 var localSdata = JSON.parse(localStorage.getItem('localSName')) || [];
 var list = document.querySelector('.list');
 var clickName = document.querySelector('.optionvalue');
+var backtotop = document.querySelector('.backtotop');
 
 
 // 監聽 selectlist
@@ -2671,8 +2672,18 @@ function initial() {
     clickName.innerHTML = '全部地區';
 }
 
-// 取得 scrollbir 的值
-window.onscroll = function() {
+// 監聽 backtotop 是否有被點擊，被點擊後 smooth 至 top = 0;
+backtotop.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
+// 監聽 window 中 scroll 的值去做 event 判斷
+window.addEventListener('scroll', function(e) {
+
     var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
     // console.log('scrollTop :', scrollTop);
 
@@ -2684,7 +2695,16 @@ window.onscroll = function() {
     var scrolled = (scrollTop / scrollTopheight) * 100;
     scrolled = scrolled.toFixed(2);
     // console.log(scrolled);
-};
+
+    // backtotop 之判斷式
+    // 透過修改 display = "block"; & display = "none"; 來達到目的
+    if (scrolled >= 20) {
+        backtotop.style.display = "block";
+    } else {
+        backtotop.style.display = "none";
+    }
+});
+
 
 // 確認點擊動作會有怎樣的 response
 function clickselect(e) {
