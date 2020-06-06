@@ -2602,12 +2602,14 @@ var data = [{
 ];
 // 指定 DOM
 var selectlist = document.querySelector('.select');
-var localSdata = JSON.parse(localStorage.getItem('listData')) || [];
+var localSdata = JSON.parse(localStorage.getItem('localSName')) || [];
+var list = document.querySelector('.list');
+var clickName = document.querySelector('.optionvalue');
+
 
 // 監聽 selectlist
 selectlist.addEventListener('click', clickselect);
 initial();
-
 // 開啟 Web 初始
 function initial() {
     // 預先將下拉式選單之高雄市區域地名 --> 取出 -- > 置入
@@ -2620,13 +2622,13 @@ function initial() {
         KHHlocationArray.push(data[i].Zone);
     }
 
-    console.log(KHHlocationArray);
+    // console.log(KHHlocationArray);
 
     // 運用 new Set 去除相同地名 but new Set() 輸出值為 Object
     // SO 運用  Array.from()將其轉換回矩陣型態
     KHHlocationArray = Array.from(new Set(KHHlocationArray));
 
-    console.log(KHHlocationArray);
+    /*console.log(KHHlocationArray);*/
     // 去除相同地名後計算 newKlAlen 長度
     var newKlAlen = KHHlocationArray.length;
     // 初始為 ${--請選擇行政區--}
@@ -2642,10 +2644,113 @@ function initial() {
     selectlist.innerHTML = addselect;
 }
 
+// 確認點擊動作會有怎樣的 response
 function clickselect(e) {
     e.preventDefault();
-    var click = e.target.nodeName;
-    var index = e.target.value;
-    console.log(click);
-    console.log(index);
+    // // 取出點擊動作之 value
+    // var nodeName = e.target.nodeName;
+    var optionvalue = e.target.value;
+    // console.log(nodeName);
+    console.log('選取的地名為:', optionvalue);
+    // create 一個 KKHAArray
+    var KKHAArray = {
+        localSName: optionvalue,
+    };
+    // 將 KKHAArray 資料 push 至 localSdata
+    localSdata.push(KKHAArray);
+    localStorage.setItem('localSName', JSON.stringify(localSdata));
+    //  計算存取資料長度
+    var localSdatalen = localSdata.length;
+    if (optionvalue == '--請選擇行政區--' || optionvalue == localSdata[localSdatalen - 2].localSName) {
+        return
+    } else {
+        console.log('YES');
+        var str = '';
+        var datalen = data.length;
+        for (var i = 0; i < datalen; i++) {
+            str +=
+                `
+                <li>
+                <div class="img" style="width: 100%; height: 200px; background: url(${data[i].Picture1}); background-repeat: no-repeat; background-size: cover; background-position: center; display: flex; justify-content: space-between; align-items: flex-end;">
+                <h3 style="font-size: 24px; color: white; margin: 10px 20px;">${data[i].Name}</h3>
+                <h4 style="font-size: 16px; color: white; margin: 10px 20px;">${data[i].Zone}</h4>
+                </div>
+                <div class="Inf" >
+                <span>
+                <img src="images/icons_clock.png" alt="">
+                ${data[i].Opentime}
+                </span>
+                <span>
+                <img src="images/icons_pin.png" alt="">
+                ${data[i].Add}
+                </span>
+                <span>
+                <img src="images/icons_phone.png" alt="">
+                ${data[i].Tel}
+                </span>
+                </div>
+                </li>       
+                `
+        }
+        list.innerHTML = str;
+        clickName.innerHTML = optionvalue;
+        //  background - position: center;  "
+    }
 }
+
+
+// function showtheall() {
+// console.log('onchange');
+// // // 將暫存的值抓下來
+// var getdata = localStorage.getItem('localSName');
+// var getdataArray = JSON.parse(getdata);
+// // Create 一個空的 Array,用於處理 Popularbtn
+// var Populardata = [];
+// var Populardatalen = getdataArray.length;
+// for (var i = 0; i < Populardatalen; i++) {
+//     Populardata.push(getdataArray[i].localSName);
+//     Populardata = Array.from(new Set(Populardata));
+// }
+// console.log(Populardata);
+// console.log(Populardata[0]);
+// console.log('抓localStorage暫存的最後一筆資料 :', Populardata[Populardatalen]);
+
+// // 
+// // console.log('aaaaaaaaaaaaaaa', Populardata);
+// // newPopulardata = Populardata.reverse();
+// // console.log('bbbbbbbbbbbbbbb', newPopulardata);
+// // console.log('newPopulardata:', newPopulardata);
+// }
+
+// function aa(e) {
+
+// }
+
+
+
+// function selectonchange(e) {
+//     // // 取出點擊動作之 value
+//     // var nodeName = e.target.nodeName;
+//     var optionvalue = e.target.value;
+//     // console.log(nodeName);
+//     console.log('選取的地名為:', optionvalue);
+//     // create 一個 KKHAArray
+//     var KKHAArray = {
+//         localSName: optionvalue,
+//     };
+//     // 將 KKHAArray 資料 push 至 localSdata
+//     localSdata.push(KKHAArray);
+//     localStorage.setItem('localSName', JSON.stringify(localSdata));
+//     //  計算存取資料長度
+//     var localSdatalen = localSdata.length;
+//     if (optionvalue == '--請選擇行政區--' || optionvalue == localSdata[localSdatalen - 2].localSName) {
+//         return
+//     } else {
+//         var datalen = data.length;
+//         var len = items.length;
+//         console.log(len);
+//         for (var i = 0; i < datalen; i++) {
+//             console.log(datalen);
+//         }
+//     }
+// }

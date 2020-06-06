@@ -188,13 +188,55 @@ table {
     padding: 20px;
 }
 
+.Divider {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 25px;
+    padding-top: 50px;
+    width: 100%;
+    border-top: 3px dotted #559AC8;
+}
+
+.Divider .optionvalue {
+    font-size: 36px;
+    color: #8A82CC;
+}
+
 .main {
     position: relative;
-    top: -50px;
-    background-color: pink;
+    width: 100%;
+    height: 100px;
+    border: 1px solid ##559AC8;
+}
+
+.main .list li {
+    float: left;
+    width: 47%;
+    height: 320px;
+    margin: 1%;
+    box-shadow: 0 0 10px gray;
+    border-radius: 10px;
+}
+
+.main .list .Inf {
+    display: flex;
+    flex-direction: column;
+}
+
+.main .list span {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.main .list span img {
+    margin-top: 5px;
+    padding: 5px 10px;
 }
 
 .footer {
+    width: 100%;
     height: 90px;
     background: #559AC8;
     display: flex;
@@ -203,7 +245,7 @@ table {
     flex-direction: column;
 }
 
-.footer h3 {
+.footer h5 {
     font-size: 14px;
     color: white;
     margin: 10px;
