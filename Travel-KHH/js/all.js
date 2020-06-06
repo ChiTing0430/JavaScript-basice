@@ -2603,13 +2603,16 @@ var data = [{
 // 指定 DOM
 var selectlist = document.querySelector('.select');
 var localSdata = JSON.parse(localStorage.getItem('localSName')) || [];
+var NewlocalSdata = JSON.parse(localStorage.getItem('NewlocalSdata')) || [];
 var list = document.querySelector('.list');
 var clickName = document.querySelector('.optionvalue');
 var backtotop = document.querySelector('.backtotop');
+var Popularbtn = document.querySelector('.Popularbtn');
 
 
 // 監聽 selectlist
 selectlist.addEventListener('click', clickselect);
+selectlist.addEventListener('change', ChangeNewPopularbtn);
 initial();
 // 開啟 Web 初始
 function initial() {
@@ -2761,3 +2764,30 @@ function clickselect(e) {
         clickName.innerHTML = optionvalue;
     }
 }
+
+// 假如
+function ChangeNewPopularbtn(e) {
+    e.preventDefault();
+    var ChangeNewvale = e.target.value;
+    console.log('改變之地名 :', ChangeNewvale);
+    var KKHAArray = {
+        ChangeNewlocalSName: ChangeNewvale,
+    };
+    NewlocalSdata.push(KKHAArray);
+    localStorage.setItem('ChangeNewvale', JSON.stringify(NewlocalSdata));
+    var NewlocalSdatalen = NewlocalSdata.length;
+    if (ChangeNewvale == '--請選擇行政區--') {
+        return
+    } else {
+        console.log('YESSSSSSSSSSSSSSSSSS');
+    }
+}
+
+
+
+
+
+
+Popularbtn.addEventListener('click', function() {
+    console.log('12312312312312312123123');
+})
