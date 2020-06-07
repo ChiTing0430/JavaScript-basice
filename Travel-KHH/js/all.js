@@ -2671,6 +2671,26 @@ function initial() {
                 </li>       
                 `
     }
+    // 初始的 Popularbtn
+    var Pop = '';
+    for (var i = 0; i < 1; i++) {
+        Pop +=
+            `
+            <li class="Popular1" style="background-color: #8A82CC;">
+                <a href="#" data-name="三民區">三民區</a>
+            </li>
+            <li class="Popular2" style="background-color: #FFA782;">
+                <a href="#" data-name="內門區">內門區</a>
+            </li>
+            <li class="Popular3" style="background-color: #F5D005;">
+                <a href="#" data-name="美濃區">美濃區</a>
+            </li>
+            <li class="Popular4" style="background-color: #559AC8;">
+                <a href="#" data-name="大樹區">大樹區</a>
+            </li>
+            `
+    }
+    Popularbtn.innerHTML = Pop;
     list.innerHTML = str;
     clickName.innerHTML = '全部地區';
 }
@@ -2730,7 +2750,6 @@ function clickselect(e) {
     if (optionvalue == '--請選擇行政區--' || optionvalue == localSdata[localSdatalen - 2].localSName) {
         return
     } else {
-        console.log('YES');
         var str = '';
         var datalen = data.length;
         for (var i = 0; i < datalen; i++) {
@@ -2765,29 +2784,172 @@ function clickselect(e) {
     }
 }
 
-// 假如
+
 function ChangeNewPopularbtn(e) {
     e.preventDefault();
     var ChangeNewvale = e.target.value;
     console.log('改變之地名 :', ChangeNewvale);
     var KKHAArray = {
         ChangeNewlocalSName: ChangeNewvale,
-    };
+    }
     NewlocalSdata.push(KKHAArray);
     localStorage.setItem('ChangeNewvale', JSON.stringify(NewlocalSdata));
-    var NewlocalSdatalen = NewlocalSdata.length;
+    var Nlen = NewlocalSdata.length;
+    console.log(Nlen);
+
     if (ChangeNewvale == '--請選擇行政區--') {
         return
     } else {
-        console.log('YESSSSSSSSSSSSSSSSSS');
+        for (var i = 0; i < Nlen; i++) {
+            if (i < 1) {
+                str =
+                    `
+                <li class="Popular1" style="background-color: #8A82CC;">
+                    <a href="#" data-name="${NewlocalSdata[i].ChangeNewlocalSName}">${NewlocalSdata[i].ChangeNewlocalSName}</a>
+                </li>
+                <li class="Popular2" style="background-color: #FFA782;">
+                <a href="#" data-name="內門區">內門區</a>
+                </li>
+                <li class="Popular3" style="background-color: #F5D005;">
+                <a href="#" data-name="美濃區">美濃區</a>
+                </li>
+                <li class="Popular4" style="background-color: #559AC8;">
+                <a href="#" data-name="大樹區">大樹區</a>
+                </li>
+                `
+            }
+            if (i >= 1 && i <= 2) {
+                str =
+                    `
+                    <li class="Popular1" style="background-color: #8A82CC;">
+                    <a href="#" data-name="${NewlocalSdata[i].ChangeNewlocalSName}">${NewlocalSdata[i].ChangeNewlocalSName}</a>
+                    </li>
+                    <li class="Popular2" style="background-color: #FFA782;">
+                    <a href="#" data-name="${NewlocalSdata[i-1].ChangeNewlocalSName}">${NewlocalSdata[i-1].ChangeNewlocalSName}</a>
+                    </li>
+                    <li class="Popular3" style="background-color: #F5D005;">
+                    <a href="#" data-name="美濃區">美濃區</a>
+                    </li>
+                    <li class="Popular4" style="background-color: #559AC8;">
+                    <a href="#" data-name="大樹區">大樹區</a>
+                    </li>
+                    `
+            }
+            if (i >= 2 && i <= 3) {
+                str =
+                    `
+                    <li class="Popular1" style="background-color: #8A82CC;">
+                    <a href="#" data-name="${NewlocalSdata[i].ChangeNewlocalSName}">${NewlocalSdata[i].ChangeNewlocalSName}</a>
+                    </li>
+                    <li class="Popular2" style="background-color: #FFA782;">
+                    <a href="#" data-name="${NewlocalSdata[i-1].ChangeNewlocalSName}">${NewlocalSdata[i-1].ChangeNewlocalSName}</a>
+                    </li>
+                    <li class="Popular3" style="background-color: #F5D005;">
+                    <a href="#" data-name="${NewlocalSdata[i-2].ChangeNewlocalSName}">${NewlocalSdata[i-2].ChangeNewlocalSName}</a>
+                    </li>
+                    <li class="Popular4" style="background-color: #559AC8;">
+                    <a href="#" data-name="大樹區">大樹區</a>
+                    </li>
+                    `
+            }
+            if (i >= 3 && i < 4) {
+                str =
+                    `
+                    <li class="Popular1" style="background-color: #8A82CC;">
+                    <a href="#" data-name="${NewlocalSdata[i].ChangeNewlocalSName}">${NewlocalSdata[i].ChangeNewlocalSName}</a>
+                    </li>
+                    <li class="Popular2" style="background-color: #FFA782;">
+                    <a href="#" data-name="${NewlocalSdata[i-1].ChangeNewlocalSName}">${NewlocalSdata[i-1].ChangeNewlocalSName}</a>
+                    </li>
+                    <li class="Popular3" style="background-color: #F5D005;">
+                    <a href="#" data-name="${NewlocalSdata[i-2].ChangeNewlocalSName}">${NewlocalSdata[i-2].ChangeNewlocalSName}</a>
+                    </li>
+                    <li class="Popular4" style="background-color: #559AC8;">
+                    <a href="#" data-name="${NewlocalSdata[i-3].ChangeNewlocalSName}">${NewlocalSdata[i-3].ChangeNewlocalSName}</a>
+                    </li>
+                    `
+            }
+            if (i > 4) {
+                str =
+                    `
+                <li class="Popular1" style="background-color: #8A82CC;">
+                <a href="#" data-name="${NewlocalSdata[i].ChangeNewlocalSName}">${NewlocalSdata[i].ChangeNewlocalSName}</a>
+                </li>
+                <li class="Popular2" style="background-color: #FFA782;">
+                <a href="#" data-name="${NewlocalSdata[i-1].ChangeNewlocalSName}">${NewlocalSdata[i-1].ChangeNewlocalSName}</a>
+                </li>
+                <li class="Popular3" style="background-color: #F5D005;">
+                <a href="#" data-name="${NewlocalSdata[i-2].ChangeNewlocalSName}">${NewlocalSdata[i-2].ChangeNewlocalSName}</a>
+                </li>
+                <li class="Popular4" style="background-color: #559AC8;">
+                <a href="#" data-name="${NewlocalSdata[i-3].ChangeNewlocalSName}">${NewlocalSdata[i-3].ChangeNewlocalSName}</a>
+                </li>
+                `
+            }
+        }
+        Popularbtn.innerHTML = str;
     }
 }
 
 
+// 基本上與 function clickselect() 一樣
+Popularbtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    // // 取出點擊動作之 value
 
 
+    /*---------------------新增---------------------*/
+    // 了解點擊是否在 A 連結上
+    var nodeName = e.target.nodeName;
+    if (nodeName !== 'A') { return }
+    // 取出 Popularbtn 裡的 data-name
+    var optionvalue = e.target.dataset.name;
+    /*---------------------------------------------*/
 
 
-Popularbtn.addEventListener('click', function() {
-    console.log('12312312312312312123123');
+    // create 一個 KKHAArray
+    var KKHAArray = {
+        localSName: optionvalue,
+    };
+    // 將 KKHAArray 資料 push 至 localSdata
+    localSdata.push(KKHAArray);
+    localStorage.setItem('localSName', JSON.stringify(localSdata));
+    //  計算存取資料長度
+    var localSdatalen = localSdata.length;
+    // 設定初始狀態與點擊相同地區時不做任何動作
+    if (optionvalue == '--請選擇行政區--' || optionvalue == localSdata[localSdatalen - 2].localSName) {
+        return
+    } else {
+        var str = '';
+        var datalen = data.length;
+        for (var i = 0; i < datalen; i++) {
+            if (data[i].Zone == optionvalue) {
+                str +=
+                    `
+                <li>
+                <div class="img" style="width: 100%; height: 200px; background: url(${data[i].Picture1}); background-repeat: no-repeat; background-size: cover; background-position: center; display: flex; justify-content: space-between; align-items: flex-end;">
+                <h3 style="font-size: 24px; color: white; margin: 10px 20px;">${data[i].Name}</h3>
+                <h4 style="font-size: 16px; color: white; margin: 10px 20px;">${data[i].Zone}</h4>
+                </div>
+                <div class="Inf" >
+                <span>
+                <img src="images/icons_clock.png" alt="">
+                ${data[i].Opentime}
+                </span>
+                <span>
+                <img src="images/icons_pin.png" alt="">
+                ${data[i].Add}
+                </span>
+                <span>
+                <img src="images/icons_phone.png" alt="">
+                ${data[i].Tel}
+                </span>
+                </div>
+                </li>       
+                `
+            }
+        }
+        list.innerHTML = str;
+        clickName.innerHTML = optionvalue;
+    }
 })
