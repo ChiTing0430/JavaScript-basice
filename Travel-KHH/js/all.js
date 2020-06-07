@@ -2784,19 +2784,23 @@ function clickselect(e) {
     }
 }
 
-
+// 當 select onChange 時觸發
 function ChangeNewPopularbtn(e) {
     e.preventDefault();
+
     var ChangeNewvale = e.target.value;
-    console.log('改變之地名 :', ChangeNewvale);
+    // console.log('改變之地名 :', ChangeNewvale);
+
     var KKHAArray = {
         ChangeNewlocalSName: ChangeNewvale,
     }
     NewlocalSdata.push(KKHAArray);
     localStorage.setItem('ChangeNewvale', JSON.stringify(NewlocalSdata));
+
     var Nlen = NewlocalSdata.length;
     console.log(Nlen);
 
+    // 修改 Popularbtn
     if (ChangeNewvale == '--請選擇行政區--') {
         return
     } else {
